@@ -5,3 +5,4 @@ test-output
 .settings
 .allure
 allure-results
+allure-*
