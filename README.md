@@ -6,4 +6,5 @@ and find that the `allure-results` directory is generated not in the `target` di
 Run command
 `$ mvn clean test allure:report`
 and find the error of type:
+
 [ERROR] Directory E:\workspace\project_name\target\allure-results not found.
