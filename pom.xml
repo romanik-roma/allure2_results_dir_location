@@ -26,6 +26,7 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.20.1</version>
 				<configuration>
+					<!-- <testFailureIgnore>true</testFailureIgnore> -->
 					<argLine>
 						-javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar
 					</argLine>
@@ -39,17 +40,18 @@
 				</dependencies>
 			</plugin>
 
-			<plugin>
-				<groupId>io.qameta.allure</groupId>
-				<artifactId>allure-maven</artifactId>
-				<version>2.9</version>
-				<configuration>
-					<reportVersion>2.4.1</reportVersion>
-				</configuration>
-			</plugin>
-
 		</plugins>
 	</build>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>ru.yandex.qatools.allure</groupId>
+				<artifactId>allure-maven-plugin</artifactId>
+				<version>2.6</version>
+			</plugin>
+		</plugins>
+	</reporting>
 
 	<dependencies>
 		<dependency>
@@ -60,10 +62,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>io.qameta.allure</groupId>
-			<artifactId>allure-testng</artifactId>
-			<version>2.0-BETA19</version>
-			<scope>test</scope>
+			<groupId>ru.yandex.qatools.allure</groupId>
+			<artifactId>allure-testng-adaptor</artifactId>
+			<version>1.5.4</version>
 		</dependency>
 
 		<dependency>
