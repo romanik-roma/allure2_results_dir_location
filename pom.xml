@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.qa</groupId>
@@ -7,6 +8,10 @@
 
 	<properties>
 		<aspectj.version>1.8.11</aspectj.version>
+		<allure.report.version>2.8.1</allure.report.version>
+		<allure.testng.version>2.8.1</allure.testng.version>
+		<allure.version>2.8.1</allure.version>
+		<allure.download.url>https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/${allure.version}/allure-commandline-${allure.version}.zip</allure.download.url>
 	</properties>
 
 	<build>
@@ -29,6 +34,17 @@
 					<argLine>
 						-javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar
 					</argLine>
+
+					<properties>
+						<property>
+							<name>usedefaultlisteners</name>
+							<value>false</value>
+						</property>
+						<property>
+							<name>listener</name>
+							<value>com.qa.tool.ListenToMe</value>
+						</property>
+					</properties>
 				</configuration>
 				<dependencies>
 					<dependency>
@@ -44,17 +60,30 @@
 				<artifactId>allure-maven</artifactId>
 				<version>2.9</version>
 				<configuration>
-					<resultsDirectory>${user.dir}/allure-results</resultsDirectory>
-					<!-- <propertiesFilePath>report.properties</propertiesFilePath> -->
-					<reportVersion>2.4.1</reportVersion>
-					<properties>
-						<allure.issues.tracker.pattern>http://example.com/%s</allure.issues.tracker.pattern>
-					</properties>
+					<resultsDirectory>allure-results</resultsDirectory>
+					<reportVersion>${allure.report.version}</reportVersion>
+					<allureDownloadUrl>${allure.download.url}</allureDownloadUrl>
 				</configuration>
 			</plugin>
 
 		</plugins>
 	</build>
+
+	<reporting>
+		<excludeDefaults>true</excludeDefaults>
+		<plugins>
+			<plugin>
+				<groupId>io.qameta.allure</groupId>
+				<artifactId>allure-maven</artifactId>
+				<version>2.9</version>
+				<configuration>
+					<resultsDirectory>allure-results</resultsDirectory>
+					<reportVersion>${allure.report.version}</reportVersion>
+					<allureDownloadUrl>${allure.download.url}</allureDownloadUrl>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
 
 	<dependencies>
 		<dependency>
@@ -66,7 +95,7 @@
 		<dependency>
 			<groupId>io.qameta.allure</groupId>
 			<artifactId>allure-testng</artifactId>
-			<version>2.0-BETA19</version>
+			<version>${allure.testng.version}</version>
 		</dependency>
 
 		<dependency>
